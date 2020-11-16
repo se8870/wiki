@@ -1,14 +1,12 @@
 ---
 title: OnDialogResponse
-description: Callback ini akan terpanggil ketika pemain merespon kepada dialog yang muncul menggunakan ShowPlayerDialog entah itu dengan cara mengklik tombol, menekan ENTER/ESC atau mengklik dua kali list item (jika menggunakan list style dialog).
+description: Callback ini akan terpanggil ketika pemain merespon pada dialog yang muncul menggunakan ShowPlayerDialog entah itu dengan cara mengklik tombol, menekan ENTER/ESC atau mengklik dua kali list item (jika menggunakan list style dialog).
 tags: []
 ---
 
-:::warning
+import T from '../../../../../src/components/templates.js'
 
-Callback ini telah ditambahkan dalam SA-MP 0.3a dan tidak akan bekerja pada versi sebelumnya!
-
-:::
+<T.VersionWarnID name='Callback' version='SA-MP 0.3a' />
 
 ## Deskripsi
 
@@ -19,16 +17,16 @@ Callback ini akan terpanggil ketika pemain merespon kepada dialog yang muncul me
 | playerid    | ID dari pemain yang merespon dialog.                                                                                                  |
 | dialogid    | ID dari dialog yang pemain respond sebagaimana ditetapkan di ShowPlayerDialog.                                                        |
 | response    | 1 Untuk tombol kiri dan 0 untuk tombol kanan (Jika hanya satu tombol yang ada, maka hanya 1)                                          |
-| listitem    | ID dari list item yang dipilih oleh player (dimulai dari 0) (hanya ketika menggunakan list style dialog, sebaliknya akan menjadi -1). |
-| inputtext[] | Sebuah text yang dimasukkan kedalam input box dari player atau text dari list item yang terpilih.                                     |
+| listitem    | ID dari list item yang dipilih oleh pemain (dimulai dari 0) (hanya ketika menggunakan dialog list style, sebaliknya akan menjadi -1). |
+| inputtext[] | Sebuah teks yang dimasukkan kedalam input box dari player atau teks dari list item yang terpilih.                                     |
 
 ## Returns
 
-Ini akan selalu terpanggil pertama di filterscripts jadi mengembalikan nilai 1 akan melarang filterscript lain untuk melihatnya.
+Ini selalu terpanggil pertama dalam filterscripts, jadi mengembalikan nilai 1 akan melarang filterscript lain untuk melihatnya.
 
 ## Contoh
 
-```c
+``` c
 // Define dialog ID agar nantinya kita bisa mengelola responses
 #define DIALOG_RULES 1
 
@@ -69,11 +67,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(CheckPassword(playerid, inputtext))
             {
-                SendClientMessage(playerid, COLOR_RED, "You are now logged in!");
+                SendClientMessage(playerid, COLOR_RED, "Anda telah masuk kedalam server!");
             }
             else
             {
-                SendClientMessage(playerid, COLOR_RED, "LOGIN GAGAL.");
+                SendClientMessage(playerid, COLOR_RED, "Login Gagal.");
 
                 // Menampilkan ulang dialog loginnya
                 ShowPlayerDialog(playerid, DIALOG_LOGIN, DIALOG_STYLE_INPUT, "Login", "Masukkan passwordnya say:", "Login", "Quit");
@@ -137,7 +135,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 }
 ```
 
-## Notes
+## Catatan
 
 :::tip
 
@@ -159,4 +157,4 @@ Dialog pemain tidak akan disembunyikan ketika gamemode dimuat ulang, membuat ser
 
 ## Fungsi Terkait
 
-- [ShowPlayerDialog](../functions/ShowPlayerDialog.md): Menampilkan dialog kepada pemain.
+* [ShowPlayerDialog](../functions/ShowPlayerDialog.md): Menampilkan dialog kepada pemain.
